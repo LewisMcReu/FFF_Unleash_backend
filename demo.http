@@ -1,0 +1,82 @@
+### Get all flags
+GET localhost:8080/flags
+
+### Get a flag by id
+GET localhost:8080/flags/92944666-a41b-4dd6-a892-da45d72faae6
+
+### Like a flag
+POST localhost:8080/flags/like/92944666-a41b-4dd6-a892-da45d72faae6
+
+### Sheldon
+POST localhost:8080/flags
+Authorization: Basic c2hlbGRvbjpiYXppbmdh
+Content-Type: application/json
+
+{
+  "name": "Belgium",
+  "layers": [
+    {
+      "@type": "triband",
+      "hoistColour": "#000000",
+      "paleColour": "#FDDA24",
+      "flyColour": "#EF3340",
+      "orientation": "VERTICAL"
+    }
+  ]
+}
+
+### Leonard
+POST localhost:8080/flags
+Authorization: Basic bGVvbmFyZDpiYXppbmdh
+Content-Type: application/json
+
+{
+  "name": "Belgium",
+  "layers": [
+    {
+      "@type": "triband",
+      "hoistColour": "#000000",
+      "paleColour": "#FDDA24",
+      "flyColour": "#EF3340",
+      "orientation": "VERTICAL"
+    }
+  ]
+}
+
+
+### Raj
+POST localhost:8080/flags
+Authorization: Basic cmFqOmJhemluZ2E=
+Content-Type: application/json
+
+{
+  "name": "Belgium",
+  "layers": [
+    {
+      "@type": "triband",
+      "hoistColour": "#000000",
+      "paleColour": "#FDDA24",
+      "flyColour": "#EF3340",
+      "orientation": "VERTICAL"
+    }
+  ]
+}
+
+
+### Howard
+POST localhost:8080/flags
+Authorization: Basic aG93YXJkOmJhemluZ2E=
+Content-Type: application/json
+
+{
+  "name": "Belgium",
+  "layers": [
+    {
+      "@type": "triband",
+      "hoistColour": "#000000",
+      "paleColour": "#FDDA24",
+      "flyColour": "#EF3340",
+      "orientation": "VERTICAL"
+    }
+  ]
+}
