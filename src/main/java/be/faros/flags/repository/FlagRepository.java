@@ -3,11 +3,20 @@ package be.faros.flags.repository;
 import be.faros.flags.domain.Flag;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class FlagRepository {
-    private final Map<UUID, Flag> flags = new HashMap<>();
+
+    final Map<UUID, Flag> flags = new ConcurrentHashMap<>();
+
+    Map<UUID, Flag> getFlags() {
+        return flags;
+    }
 
     public Flag save(Flag flag) {
         flags.put(flag.getId(), flag);
