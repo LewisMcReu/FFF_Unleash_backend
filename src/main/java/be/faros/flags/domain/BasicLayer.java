@@ -1,13 +1,13 @@
 package be.faros.flags.domain;
 
 public class BasicLayer extends SingleColourLayer {
-    private Type type;
+    private BasicLayerType type;
 
-    public Type getType() {
+    public BasicLayerType getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(BasicLayerType type) {
         this.type = type;
     }
 }

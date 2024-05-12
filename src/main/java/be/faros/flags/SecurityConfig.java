@@ -40,7 +40,6 @@ public class SecurityConfig {
                                 .password("bazinga")
                                 .build()))
                 .httpBasic(withDefaults())
-                .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
     }

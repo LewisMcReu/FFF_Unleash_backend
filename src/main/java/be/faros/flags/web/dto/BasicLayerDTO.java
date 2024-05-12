@@ -1,15 +1,15 @@
 package be.faros.flags.web.dto;
 
-import be.faros.flags.domain.Type;
+import be.faros.flags.domain.BasicLayerType;
 
 public class BasicLayerDTO extends SingleColourLayerDTO {
-    private Type type;
+    private BasicLayerType type;
 
-    public Type getType() {
+    public BasicLayerType getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(BasicLayerType type) {
         this.type = type;
     }
 }

@@ -18,11 +18,16 @@ public class FlagSecurityAdvice {
     private FlagRepository flagRepository;
 
     @Before("execution(* delete(..)) && args(id,..)")
-    public void logBeforeAllMethods(UUID id) {
+    public void logBeforeDeleteMethods(UUID id) {
         var user = SecurityUtilities.getUser();
         flagRepository.findById(id).filter(flag -> flag.getUser().equals(user))
                 .orElseThrow(EntityNotFoundException::new);
     }
 
-
+    @Before("execution(* update(..)) && args(id,..)")
+    public void logBeforeUpdateMethods(UUID id) {
+        var user = SecurityUtilities.getUser();
+        flagRepository.findById(id).filter(flag -> flag.getUser().equals(user))
+                .orElseThrow(EntityNotFoundException::new);
+    }
 }
