@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/flags/like")
+@RequestMapping("/flags")
 public class Countroller {
     private final FlagService flagService;
 
@@ -17,7 +17,7 @@ public class Countroller {
         this.flagService = flagService;
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/{id}/like")
     public void getCounts(@PathVariable UUID id) {
         flagService.likeFlag(id);
     }

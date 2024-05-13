@@ -1,6 +1,7 @@
 package be.faros.flags.repository;
 
 import be.faros.flags.domain.Flag;
+import be.faros.flags.exceptions.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 @SpringBootTest
@@ -44,6 +46,17 @@ class FlagRepositoryTest {
         flagRepository.getFlags().put(id, flag);
 
         flagRepository.delete(id);
+    }
+
+    @Test
+    @WithMockUser(username = "Sheldon")
+    void deleteFlagFailsWithWrongUser() {
+        var id = UUID.randomUUID();
+        var flag = new Flag(id, "unitTester");
+        flagRepository.getFlags().put(id, flag);
+
+        assertThatThrownBy(() -> flagRepository.delete(id))
+                .isInstanceOf(EntityNotFoundException.class);
     }
 
 

@@ -1,5 +1,6 @@
 package be.faros.flags.service;
 
+import be.faros.flags.SecurityUtilities;
 import be.faros.flags.domain.BasicLayer;
 import be.faros.flags.domain.ChargeLayer;
 import be.faros.flags.domain.Flag;
@@ -10,8 +11,6 @@ import be.faros.flags.web.dto.BasicLayerDTO;
 import be.faros.flags.web.dto.ChargeLayerDTO;
 import be.faros.flags.web.dto.FlagDTO;
 import be.faros.flags.web.dto.TribandLayerDTO;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class FlagServiceImpl extends NoopFlagService {
 
     @Override
     public FlagDTO saveFlag(FlagDTO flagDTO) {
-        Flag flag = new Flag(UUID.randomUUID(), getUser());
+        Flag flag = new Flag(UUID.randomUUID(), SecurityUtilities.getUser());
         mapDTOToFlag(flagDTO, flag);
         flag = repository.save(flag);
         return mapFlagToDTO(flag);
@@ -68,22 +67,25 @@ public class FlagServiceImpl extends NoopFlagService {
         flag.setName(flagDTO.getName());
         flag.setLayers(flagDTO.getLayers().stream().map(dto -> {
             if (dto instanceof BasicLayerDTO bl) {
-                BasicLayer l = new BasicLayer();
-                l.setColour(bl.getColour());
-                l.setType(bl.getType());
-                return l;
+                BasicLayer basicLayer = new BasicLayer();
+                basicLayer.setColour(bl.getColour());
+                basicLayer.setType(bl.getType());
+                return basicLayer;
             } else if (dto instanceof ChargeLayerDTO cl) {
-                ChargeLayer l = new ChargeLayer();
-                l.setColour(cl.getColour());
-                l.setEmblem(cl.getEmblem());
-                return l;
+                ChargeLayer chargeLayer = new ChargeLayer();
+                chargeLayer.setColour(cl.getColour());
+                chargeLayer.setEmblem(cl.getEmblem());
+                chargeLayer.setHorizontalOffsetPercentage(cl.getHorizontalOffsetPercentage());
+                chargeLayer.setVerticalOffsetPercentage(cl.getVerticalOffsetPercentage());
+                chargeLayer.setScaling(cl.getScaling());
+                return chargeLayer;
             } else if (dto instanceof TribandLayerDTO tl) {
-                TribandLayer l = new TribandLayer();
-                l.setFlyColour(tl.getFlyColour());
-                l.setOrientation(tl.getOrientation());
-                l.setHoistColour(tl.getHoistColour());
-                l.setPaleColour(tl.getPaleColour());
-                return l;
+                TribandLayer tribandLayer = new TribandLayer();
+                tribandLayer.setFlyColour(tl.getFlyColour());
+                tribandLayer.setOrientation(tl.getOrientation());
+                tribandLayer.setHoistColour(tl.getHoistColour());
+                tribandLayer.setPaleColour(tl.getPaleColour());
+                return tribandLayer;
             }
             throw new IllegalStateException("Unknown layer type");
         }).toList());
@@ -104,6 +106,9 @@ public class FlagServiceImpl extends NoopFlagService {
                 ChargeLayerDTO lDTO = new ChargeLayerDTO();
                 lDTO.setColour(cl.getColour());
                 lDTO.setEmblem(cl.getEmblem());
+                lDTO.setHorizontalOffsetPercentage(cl.getHorizontalOffsetPercentage());
+                lDTO.setVerticalOffsetPercentage(cl.getVerticalOffsetPercentage());
+                lDTO.setScaling(cl.getScaling());
                 return lDTO;
             } else if (layer instanceof TribandLayer tl) {
                 TribandLayerDTO lDTO = new TribandLayerDTO();
@@ -118,7 +123,4 @@ public class FlagServiceImpl extends NoopFlagService {
         return dto;
     }
 
-    private String getUser() {
-        return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-    }
 }

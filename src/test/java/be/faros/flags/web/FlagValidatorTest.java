@@ -1,7 +1,7 @@
 package be.faros.flags.web;
 
 import be.faros.flags.FeatureFlags;
-import be.faros.flags.domain.Emblem;
+import be.faros.flags.domain.ChargeEmblem;
 import be.faros.flags.exceptions.FlagException;
 import be.faros.flags.web.dto.ChargeLayerDTO;
 import be.faros.flags.web.dto.FlagDTO;
@@ -44,7 +44,7 @@ class FlagValidatorTest {
     void validateNasaEmblemIsOff() {
         var mockedDto = mock(FlagDTO.class);
         var layerDTO = new ChargeLayerDTO();
-        layerDTO.setEmblem(Emblem.NASA);
+        layerDTO.setEmblem(ChargeEmblem.NASA);
         when(mockedDto.getLayers()).thenReturn(List.of(layerDTO));
 
         when(unleash.isEnabled(FeatureFlags.CHARGE)).thenReturn(true);
@@ -61,7 +61,7 @@ class FlagValidatorTest {
     void validate(boolean charge, boolean nasa) {
         var mockedDto = mock(FlagDTO.class);
         var layerDTO = new ChargeLayerDTO();
-        layerDTO.setEmblem(Emblem.NASA);
+        layerDTO.setEmblem(ChargeEmblem.NASA);
 
         when(mockedDto.getLayers()).thenReturn(List.of(layerDTO));
 

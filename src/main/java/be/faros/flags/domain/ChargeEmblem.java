@@ -1,5 +1,5 @@
 package be.faros.flags.domain;
 
-public enum Emblem {
+public enum ChargeEmblem {
     STAR, LION, DRAGON, MAPLE_LEAF, NASA
 }

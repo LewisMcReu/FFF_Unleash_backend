@@ -1,11 +1,16 @@
 ### Get all flags
 GET localhost:8080/flags
 
+
 ### Get a flag by id
-GET localhost:8080/flags/92944666-a41b-4dd6-a892-da45d72faae6
+#GET localhost:8080/flags/92944666-a41b-4dd6-a892-da45d72faae6
+GET localhost:8080/flags/29dda61a-1f59-4f11-92db-73d600f6fc99
+
 
 ### Like a flag
-POST localhost:8080/flags/like/92944666-a41b-4dd6-a892-da45d72faae6
+#POST localhost:8080/flags/92944666-a41b-4dd6-a892-da45d72faae6/like
+POST localhost:8080/flags/29dda61a-1f59-4f11-92db-73d600f6fc99/like
+
 
 ### Sheldon
 POST localhost:8080/flags

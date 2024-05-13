@@ -1,7 +1,7 @@
 package be.faros.flags.web;
 
 import be.faros.flags.FeatureFlags;
-import be.faros.flags.domain.Emblem;
+import be.faros.flags.domain.ChargeEmblem;
 import be.faros.flags.exceptions.FlagException;
 import be.faros.flags.web.dto.ChargeLayerDTO;
 import be.faros.flags.web.dto.FlagDTO;
@@ -28,7 +28,7 @@ public class FlagValidator {
             if (layer instanceof ChargeLayerDTO cl) {
                 if (!allowChargeLayers) {
                     throw new FlagException(FeatureFlags.CHARGE);
-                } else if (cl.getEmblem() == Emblem.NASA && !allowNasaEmblem) {
+                } else if (cl.getEmblem() == ChargeEmblem.NASA && !allowNasaEmblem) {
                     throw new FlagException(FeatureFlags.NASA);
                 }
             }
