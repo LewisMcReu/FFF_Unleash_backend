@@ -1,15 +1,9 @@
 package be.faros.flags.service;
 
-import be.faros.flags.domain.BasicLayer;
-import be.faros.flags.domain.ChargeLayer;
-import be.faros.flags.domain.Flag;
-import be.faros.flags.domain.TribandLayer;
+import be.faros.flags.domain.*;
 import be.faros.flags.exceptions.EntityNotFoundException;
 import be.faros.flags.repository.FlagRepository;
-import be.faros.flags.web.dto.BasicLayerDTO;
-import be.faros.flags.web.dto.ChargeLayerDTO;
-import be.faros.flags.web.dto.FlagDTO;
-import be.faros.flags.web.dto.TribandLayerDTO;
+import be.faros.flags.web.dto.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
@@ -79,10 +73,16 @@ public class FlagServiceImpl extends NoopFlagService {
                 return l;
             } else if (dto instanceof TribandLayerDTO tl) {
                 TribandLayer l = new TribandLayer();
-                l.setFlyColour(tl.getFlyColour());
                 l.setOrientation(tl.getOrientation());
+                l.setFlyColour(tl.getFlyColour());
                 l.setHoistColour(tl.getHoistColour());
                 l.setPaleColour(tl.getPaleColour());
+                return l;
+            } else if (dto instanceof BasicScalableLayerDTO sl) {
+                BasicScalableLayer l = new BasicScalableLayer();
+                l.setType(sl.getType());
+                l.setColour(sl.getColour());
+                l.setScale(sl.getScale());
                 return l;
             }
             throw new IllegalStateException("Unknown layer type");
@@ -111,6 +111,12 @@ public class FlagServiceImpl extends NoopFlagService {
                 lDTO.setOrientation(tl.getOrientation());
                 lDTO.setHoistColour(tl.getHoistColour());
                 lDTO.setPaleColour(tl.getPaleColour());
+                return lDTO;
+            } else if (layer instanceof BasicScalableLayer sl) {
+                BasicScalableLayerDTO lDTO = new BasicScalableLayerDTO();
+                lDTO.setType(sl.getType());
+                lDTO.setColour(sl.getColour());
+                lDTO.setScale(sl.getScale());
                 return lDTO;
             }
             throw new IllegalStateException("Unknown layer type");

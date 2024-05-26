@@ -5,4 +5,3 @@ io:
     environment: development
     api-url: http://localhost:4242/api/
     api-token: default:development.a50eec8500389b020e293ef079eb0fcff051554f213bb26d74208a37
-    fetch-toggles-interval:

@@ -43,7 +43,6 @@ Content-Type: application/json
   ]
 }
 
-
 ### Raj
 POST localhost:8080/flags
 Authorization: Basic cmFqOmJhemluZ2E=

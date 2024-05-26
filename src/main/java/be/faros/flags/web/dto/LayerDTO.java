@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = BasicLayerDTO.class, name = "basic"),
+        @JsonSubTypes.Type(value = BasicScalableLayerDTO.class, name = "basic-scalable"),
         @JsonSubTypes.Type(value = ChargeLayerDTO.class, name = "charge"),
         @JsonSubTypes.Type(value = TribandLayerDTO.class, name = "triband")}
 )

@@ -6,6 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -17,30 +18,36 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(c -> c
+                        .requestMatchers(HttpMethod.POST, "/flags/*/like").permitAll()
                         .requestMatchers(HttpMethod.POST, "/flags").authenticated()
-                        .requestMatchers(HttpMethod.PUT, "/flags").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "/flags").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/flags/*").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/flags/*").authenticated()
                         .anyRequest().permitAll()
                 )
-                .userDetailsService(new InMemoryUserDetailsManager(
-                        User.withDefaultPasswordEncoder()
-                                .username("sheldon")
-                                .password("bazinga")
-                                .build(),
-                        User.withDefaultPasswordEncoder()
-                                .username("leonard")
-                                .password("bazinga")
-                                .build(),
-                        User.withDefaultPasswordEncoder()
-                                .username("raj")
-                                .password("bazinga")
-                                .build(),
-                        User.withDefaultPasswordEncoder()
-                                .username("howard")
-                                .password("bazinga")
-                                .build()))
                 .httpBasic(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(withDefaults())
                 .build();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new InMemoryUserDetailsManager(
+                User.withDefaultPasswordEncoder()
+                        .username("sheldon")
+                        .password("bazinga")
+                        .build(),
+                User.withDefaultPasswordEncoder()
+                        .username("leonard")
+                        .password("bazinga")
+                        .build(),
+                User.withDefaultPasswordEncoder()
+                        .username("raj")
+                        .password("bazinga")
+                        .build(),
+                User.withDefaultPasswordEncoder()
+                        .username("howard")
+                        .password("bazinga")
+                        .build());
     }
 }
