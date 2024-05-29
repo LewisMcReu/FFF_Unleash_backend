@@ -1,6 +1,6 @@
 package be.faros.flags.domain;
 
-public class ChargeLayer extends SingleColourLayer {
+public class ChargeLayer extends ScalableLayer {
     private Emblem emblem;
 
     public Emblem getEmblem() {

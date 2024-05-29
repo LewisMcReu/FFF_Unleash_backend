@@ -5,7 +5,7 @@ GET localhost:8080/flags
 GET localhost:8080/flags/92944666-a41b-4dd6-a892-da45d72faae6
 
 ### Like a flag
-POST localhost:8080/flags/like/92944666-a41b-4dd6-a892-da45d72faae6
+POST localhost:8080/flags/92944666-a41b-4dd6-a892-da45d72faae6/like
 
 ### Sheldon
 POST localhost:8080/flags
